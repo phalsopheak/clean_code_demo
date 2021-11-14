@@ -21,6 +21,7 @@ class AddProductUseCase extends UseCase<int, ProductModel> {
   AddProductUseCase({this.productRepository});
 
   @override
+  // ignore: avoid_renaming_method_parameters
   int call(ProductModel model) {
     var id = productRepository!.addProduct(model);
     return id;

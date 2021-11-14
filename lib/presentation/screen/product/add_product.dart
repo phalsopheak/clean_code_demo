@@ -17,6 +17,8 @@ class _AddProductState extends State<AddProduct> {
   late TextEditingController tecName;
   late TextEditingController tecPrice;
   late TextEditingController tecCategory;
+  late FocusNode fnId;
+  late FocusNode fnName;
 
   @override
   void initState() {
@@ -24,11 +26,16 @@ class _AddProductState extends State<AddProduct> {
     tecName = TextEditingController();
     tecPrice = TextEditingController();
     tecCategory = TextEditingController();
+    fnId = FocusNode();
+    fnName = FocusNode();
+    fnId.requestFocus();
     super.initState();
   }
 
   @override
   void dispose() {
+    fnName.dispose();
+    fnId.dispose();
     tecId.dispose();
     tecName.dispose();
     tecPrice.dispose();
@@ -39,6 +46,7 @@ class _AddProductState extends State<AddProduct> {
   bool isValid() {
     var b = true;
     if (tecName.text == '') {
+      fnName.requestFocus();
       b = false;
     }
     return b;
@@ -73,11 +81,13 @@ class _AddProductState extends State<AddProduct> {
       body: Column(
         children: [
           TextBox(
+            focusNode: fnId,
             label: 'id',
             controller: tecId,
           ),
           TextBox(
             label: 'name',
+            focusNode: fnName,
             controller: tecName,
           ),
           TextBox(
