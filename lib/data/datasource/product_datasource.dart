@@ -3,6 +3,8 @@ import 'package:demo_clean_code/data/model/product_model.dart';
 abstract class IProductDataSource {
   List<ProductModel> getAllProduct();
   int addProduct(ProductModel model);
+  int editProduct(ProductModel model);
+  int deleteProduct(int recordId);
 }
 
 class ProductDataSource extends IProductDataSource {
@@ -25,7 +27,7 @@ class ProductDataSource extends IProductDataSource {
         price: 5,
         category: 'Dimsam',
         picture:
-            'https://lh3.googleusercontent.com/proxy/etQ7euchEiVYZIxVEJnQW_ZaCYboE-Jj5JoCEHb3GObjh1Oz207wmJjjXVnYSGXC_IKMoHIokx5X4dykIfoHzzGQgiZxA5hCspdfmrygDUV0MmXgkwgqeirMJJIbABpYIYQrcDCXUnk'),
+            'https://www.honestfoodtalks.com/wp-content/uploads/2020/02/best-dim-sum-xiao-long-bao-soup-dumpling.jpg'),
     ProductModel(
         id: 4,
         name: 'Num Pav',
@@ -44,5 +46,22 @@ class ProductDataSource extends IProductDataSource {
   int addProduct(ProductModel model) {
     listProduct.add(model);
     return model.id;
+  }
+
+  @override
+  int editProduct(ProductModel model) {
+    var id = listProduct.indexWhere(
+      (x) => x.id == model.id,
+    );
+
+    listProduct[id] = model;
+
+    return model.id;
+  }
+
+  @override
+  int deleteProduct(int recordId) {
+    listProduct.removeWhere((x) => x.id == recordId);
+    return recordId;
   }
 }

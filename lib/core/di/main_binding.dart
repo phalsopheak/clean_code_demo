@@ -25,10 +25,20 @@ class MainBinding extends Bindings {
       AddProductUseCase(productRepository: Get.find()),
       permanent: true,
     );
+    Get.put<EditProductUseCase?>(
+      EditProductUseCase(productRepository: Get.find()),
+      permanent: true,
+    );
+    Get.put<DeleteProductUseCase?>(
+      DeleteProductUseCase(productRepository: Get.find()),
+      permanent: true,
+    );
     Get.put(
       ProductController(
         getAllProductUseCase: Get.find(),
         addProductUseCase: Get.find(),
+        editProductUseCase: Get.find(),
+        deleteProductUseCase: Get.find(),
       ),
       permanent: true,
     );

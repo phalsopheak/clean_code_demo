@@ -4,14 +4,14 @@ import 'package:demo_clean_code/presentation/widget/textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddProduct extends StatefulWidget {
-  const AddProduct({Key? key}) : super(key: key);
+class EditProduct extends StatefulWidget {
+  const EditProduct({Key? key}) : super(key: key);
 
   @override
-  _AddProductState createState() => _AddProductState();
+  _EditProductState createState() => _EditProductState();
 }
 
-class _AddProductState extends State<AddProduct> {
+class _EditProductState extends State<EditProduct> {
   final ProductController productController = Get.find();
   late TextEditingController tecId;
   late TextEditingController tecName;
@@ -26,6 +26,12 @@ class _AddProductState extends State<AddProduct> {
     tecName = TextEditingController();
     tecPrice = TextEditingController();
     tecCategory = TextEditingController();
+
+    tecId.text = productController.selectedProduct.id.toString();
+    tecName.text = productController.selectedProduct.name;
+    tecPrice.text = productController.selectedProduct.price.toString();
+    tecCategory.text = productController.selectedProduct.category;
+
     fnId = FocusNode();
     fnName = FocusNode();
     fnId.requestFocus();
@@ -52,7 +58,7 @@ class _AddProductState extends State<AddProduct> {
     return b;
   }
 
-  addProduct() {
+  editProduct() {
     if (isValid()) {
       var model = ProductModel(
         id: int.tryParse(tecId.text) ?? 0,
@@ -60,7 +66,7 @@ class _AddProductState extends State<AddProduct> {
         price: double.tryParse(tecPrice.text) ?? 0,
         category: tecCategory.text,
       );
-      productController.addProduct(model);
+      productController.editProduct(model);
     } else {
       Get.snackbar('Error', 'Please input name');
     }
@@ -70,16 +76,16 @@ class _AddProductState extends State<AddProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add product'),
+        title: const Text('Edit product'),
         actions: [
           IconButton(
-            onPressed: () => addProduct(),
+            onPressed: () => editProduct(),
             icon: const Icon(Icons.save),
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             TextBox(

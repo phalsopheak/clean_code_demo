@@ -27,3 +27,29 @@ class AddProductUseCase extends UseCase<int, ProductModel> {
     return id;
   }
 }
+
+class EditProductUseCase extends UseCase<int, ProductModel> {
+  final IProductRepository? productRepository;
+
+  EditProductUseCase({this.productRepository});
+
+  @override
+  // ignore: avoid_renaming_method_parameters
+  int call(ProductModel model) {
+    var id = productRepository!.editProduct(model);
+    return id;
+  }
+}
+
+class DeleteProductUseCase extends UseCase<int, int> {
+  final IProductRepository? productRepository;
+
+  DeleteProductUseCase({this.productRepository});
+
+  @override
+  // ignore: avoid_renaming_method_parameters
+  int call(int recordId) {
+    var id = productRepository!.deleteProduct(recordId);
+    return id;
+  }
+}

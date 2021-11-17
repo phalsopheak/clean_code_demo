@@ -18,4 +18,16 @@ class ProductRepository extends IProductRepository {
     var id = productDataSource!.addProduct(model);
     return id;
   }
+
+  @override
+  int editProduct(ProductModel model) {
+    var id = productDataSource!.editProduct(model);
+    return id;
+  }
+
+  @override
+  int deleteProduct(int recordId) {
+    var id = productDataSource!.deleteProduct(recordId);
+    return id;
+  }
 }

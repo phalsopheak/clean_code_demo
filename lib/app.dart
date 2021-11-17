@@ -2,6 +2,7 @@ import 'package:demo_clean_code/core/constant/app_route.dart';
 import 'package:demo_clean_code/core/di/main_binding.dart';
 import 'package:demo_clean_code/presentation/screen/home_screen.dart';
 import 'package:demo_clean_code/presentation/screen/product/add_product.dart';
+import 'package:demo_clean_code/presentation/screen/product/edit_product.dart';
 import 'package:demo_clean_code/presentation/screen/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,6 +36,10 @@ class App extends StatelessWidget {
         GetPage(
           name: AppRoute.addProduct,
           page: () => const AddProduct(),
+        ),
+        GetPage(
+          name: AppRoute.editProduct,
+          page: () => const EditProduct(),
         ),
       ],
     );
