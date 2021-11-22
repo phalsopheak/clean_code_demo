@@ -9,6 +9,7 @@ class TextBox extends StatelessWidget {
   final TextInputAction textInputAction;
   final bool isReadOnly;
   final bool isEnabled;
+  final void Function(String value)? onChanged;
 
   const TextBox({
     Key? key,
@@ -20,6 +21,7 @@ class TextBox extends StatelessWidget {
     this.textInputAction = TextInputAction.done,
     this.isReadOnly = false,
     this.isEnabled = true,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class TextBox extends StatelessWidget {
           onKeyReturn!();
         },
         focusNode: focusNode,
+        onChanged: onChanged,
         maxLength: maxLength,
         controller: controller,
         cursorColor: Colors.black,

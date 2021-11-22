@@ -10,6 +10,7 @@ class ProductController extends GetxController {
   final DeleteProductUseCase? deleteProductUseCase;
 
   var listProduct = RxList<ProductModel>();
+  var listSearchProduct = RxList<ProductModel>();
 
   var selectedProduct = ProductModel(
     id: 0,
@@ -33,11 +34,13 @@ class ProductController extends GetxController {
     listProduct.clear();
     var list = getAllProductUseCase!.call(NoParam());
     listProduct.assignAll(list);
+    listSearchProduct.assignAll(listProduct);
   }
 
   int addProduct(ProductModel model) {
     var id = addProductUseCase!.call(model);
     listProduct.add(model);
+    listSearchProduct.add(model);
     Get.back();
     return id;
   }
@@ -50,7 +53,8 @@ class ProductController extends GetxController {
     );
 
     listProduct[index] = model;
-    listProduct.refresh();
+    listSearchProduct[index] = model;
+    listSearchProduct.refresh();
     Get.back();
     return id;
   }
@@ -58,18 +62,32 @@ class ProductController extends GetxController {
   int deleteProduct(int recordId) {
     var id = deleteProductUseCase!.call(recordId);
     listProduct.removeWhere((x) => x.id == recordId);
+    listSearchProduct.removeWhere((x) => x.id == recordId);
     return id;
   }
 
   sortAZ() {
     listProduct.sort((a, b) => a.name.compareTo(b.name));
+    listSearchProduct.sort((a, b) => a.name.compareTo(b.name));
   }
 
-  sortZA() {
-    listProduct.sort((a, b) => b.name.compareTo(a.name));
-  }
-
-  sortPriceAcs() {
-    listProduct.sort((a, b) => b.price.compareTo(a.price));
+  searchProduct(String nameSearch, {double priceSearch = 0}) {
+    if (nameSearch.trim() == '') {
+      listSearchProduct.assignAll(listProduct);
+    } else {
+      if (priceSearch == 0) {
+        listSearchProduct.assignAll(
+          listProduct.where(
+              (x) => x.name.toLowerCase().contains(nameSearch.toLowerCase())),
+        );
+      } else {
+        listSearchProduct.assignAll(
+          listProduct.where((x) =>
+              (x.name.toLowerCase().contains(nameSearch.toLowerCase()) &&
+                  x.price > priceSearch) &&
+              x.category == 'Drink'),
+        );
+      }
+    }
   }
 }

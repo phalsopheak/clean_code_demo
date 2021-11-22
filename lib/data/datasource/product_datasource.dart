@@ -12,7 +12,7 @@ class ProductDataSource extends IProductDataSource {
     ProductModel(
       id: 1,
       name: 'Coca cola',
-      price: 0.8,
+      price: 6,
       category: 'Drink',
     ),
     ProductModel(
@@ -31,7 +31,7 @@ class ProductDataSource extends IProductDataSource {
     ProductModel(
         id: 4,
         name: 'Num Pav',
-        price: 6,
+        price: 1,
         category: 'Dimsam',
         picture:
             'https://www.honestfoodtalks.com/wp-content/uploads/2020/02/best-dim-sum-xiao-long-bao-soup-dumpling.jpg'),
