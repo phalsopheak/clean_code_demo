@@ -1,9 +1,11 @@
 import 'package:demo_clean_code/core/constant/app_route.dart';
+import 'package:demo_clean_code/presentation/controller/customer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final CustomerController customerController = Get.find();
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,19 @@ class HomeScreen extends StatelessWidget {
               child: const ListTile(
                 title: Text('Product'),
                 leading: Icon(Icons.code),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Get.back();
+                Get.toNamed(AppRoute.customer);
+                customerController.loadData();
+              },
+              child: const ListTile(
+                title: Text('Customer'),
+                leading: Icon(
+                  Icons.person,
+                ),
               ),
             )
           ],

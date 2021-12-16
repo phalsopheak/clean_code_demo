@@ -1,5 +1,7 @@
 import 'package:demo_clean_code/core/constant/app_route.dart';
 import 'package:demo_clean_code/core/di/main_binding.dart';
+import 'package:demo_clean_code/presentation/screen/customer/customer.dart';
+import 'package:demo_clean_code/presentation/screen/customer/customer_screen.dart';
 import 'package:demo_clean_code/presentation/screen/home_screen.dart';
 import 'package:demo_clean_code/presentation/screen/product/add_product.dart';
 import 'package:demo_clean_code/presentation/screen/product/edit_product.dart';
@@ -27,11 +29,11 @@ class App extends StatelessWidget {
       getPages: [
         GetPage(
           name: AppRoute.home,
-          page: () => const HomeScreen(),
+          page: () => HomeScreen(),
         ),
         GetPage(
           name: AppRoute.product,
-          page: () => ProductScreen(),
+          page: () => const ProductScreen(),
         ),
         GetPage(
           name: AppRoute.addProduct,
@@ -40,6 +42,10 @@ class App extends StatelessWidget {
         GetPage(
           name: AppRoute.editProduct,
           page: () => const EditProduct(),
+        ),
+        GetPage(
+          name: AppRoute.customer,
+          page: () => CustomerScreen(),
         ),
       ],
     );
